@@ -1,0 +1,101 @@
+﻿<Window x:Class="Getting_Real.View.UpdateCompanyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Getting_Real.View"
+        mc:Ignorable="d"
+        Title="UpdateCompanyDialog" Height="650" Width="800"        
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="standardBtn"  TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="80"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="8" Background="#FFFF6F00" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#2A5631"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" MinWidth="200"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListBox x:Name="lbCompanyList" ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany}" Grid.Row="0" Margin="0,88,0,10" Grid.RowSpan="2" SelectionChanged="lbCompanyList_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding CompanyName}"/>
+                            <Label Content=":"/>
+                            <Label Content="{Binding Field}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <GridSplitter Width="5" Grid.Column="1" HorizontalAlignment="Stretch"/>
+        <Label Content="Rediger virksomhed" FontSize="14" FontWeight="Bold" Grid.Column="2" HorizontalAlignment="Left" Margin="183,32,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="73" Margin="10,10,0,0" VerticalAlignment="Top" Width="149" Source="/View/logo.png" RenderTransformOrigin="0.202,0.278"/>
+
+        <Label Content="Navn på virksomhed:" HorizontalAlignment="Left" Margin="83,77,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="CVR-nummer:" Grid.Column="2" HorizontalAlignment="Left" Margin="83,124,0,0" VerticalAlignment="Top"/>
+        <Label Content="Telefonnummer:" HorizontalAlignment="Left" Margin="83,174,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="E-mail:" HorizontalAlignment="Left" Margin="83,226,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Branche:" HorizontalAlignment="Left" Margin="83,283,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Dato for 1. kontakt:" HorizontalAlignment="Left" Margin="83,339,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="83,392,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Kommentar:" HorizontalAlignment="Left" Margin="83,444,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Opfølgende brev:" HorizontalAlignment="Left" Margin="83,519,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+
+        <TextBox x:Name="tbCompanyName" Text="{Binding SelectedCompany.CompanyName}" HorizontalAlignment="Left" Margin="225,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.Column="2"/>
+        <TextBox x:Name="tbCVRNumber" Text="{Binding SelectedCompany.CVRNumber}" HorizontalAlignment="Left" Margin="225,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.Column="2"/>
+        <TextBox x:Name="tbPhoneNumber" Text="{Binding SelectedCompany.PhoneNumber}" HorizontalAlignment="Left" Margin="225,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.Column="2"/>
+        <TextBox x:Name="tbEmail" Text="{Binding SelectedCompany.EMail}" HorizontalAlignment="Left" Margin="225,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.Column="2"/>
+        <ComboBox x:Name="cbField" Text="{Binding SelectedCompany.Field}" HorizontalAlignment="Left" Margin="225,285,0,0" VerticalAlignment="Top" Width="209" IsEditable="True" ItemsSource="{Binding Field}" Grid.Column="2" />
+        <TextBox x:Name="tbDateOfFirstContact" IsReadOnly="True" Text="{Binding SelectedCompany.DateOfFirstContact}" HorizontalAlignment="Left" Margin="225,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="209" Grid.Column="2" BorderBrush="#FFABADB3"/>
+        <ComboBox x:Name="cbStatus" Text="{Binding SelectedCompany.Status}" HorizontalAlignment="Left" Margin="225,394,0,0" VerticalAlignment="Top" Width="210" IsEditable="True" ItemsSource="{Binding Status}" Grid.Column="2" />
+        <TextBox x:Name="tbComment" Text="{Binding SelectedCompany.Comment}" HorizontalAlignment="Left" Margin="225,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" Height="53" Grid.Column="2"/>
+
+        <RadioButton x:Name="rBtnLetterYes" Content="Ja" HorizontalAlignment="Left" Margin="227,525,0,0" VerticalAlignment="Top" GroupName="LetterRadioButton" Grid.Column="2"/>
+        <RadioButton x:Name="rBtnLetterNo" Content="Nej" HorizontalAlignment="Left" Margin="321,525,0,0" VerticalAlignment="Top" GroupName="LetterRadioButton" Grid.Column="2"/>
+
+        <Button x:Name="btnSaveCompany" IsEnabled="False"  IsDefault="True" Content="Gem virksomhed" Grid.Column="2" HorizontalAlignment="Left" Margin="331,566,0,0" VerticalAlignment="Top" Width="104" Click="btnSaveCompany_Click" BorderBrush="{x:Null}" Background="#FFFF6F00" Foreground="#ffffff" Height="30">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="btnDeleteCompany" IsEnabled="False" IsDefault="true" Content="Slet virksomhed" Grid.Column="2" HorizontalAlignment="Left" Margin="206,566,0,0" VerticalAlignment="Top" Width="113" Click="btnDeleteCompany_Click" BorderBrush="{x:Null}" Background="#FFFF6F00" Foreground="#ffffff" Height="30">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="8"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button Style="{StaticResource standardBtn}" Content="Fortryd" Grid.Column="2" IsCancel="True" HorizontalAlignment="Left" Margin="117,566,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
